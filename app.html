@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="app.css">
+    <title>to-do-list web app</title>
+    </head>
+    <body style="background-color:rgb(37, 62, 71)">
+        <h1 class="h1">To-Do List Web App</h1>
+        <table border="0">
+            <tr>
+                <th style="color:white"></th>
+                <th style="color:white; padding-left: 20px;">title</th>
+              
+                <th style="color:white">delete</th>
+            </tr>
+            <tr>
+    <td style="padding:20px"><div class="container">
+            <input type="text" id="myInput" placeholder="Title..." style="border-radius: 10px;padding:5px 5px 5px 5px;width:300px;height:20px;margin-bottom:10px;"required><br>
+            <textarea placeholder="Description" cols="39" rows="15" style="border-radius: 10px;margin-bottom:7px;"></textarea>
+            <button onclick="newElement()" class="Btn">Save</button>
+        </div></td>
+        <td colspan="3"><ul id="list">
+            <li>Read a book</li>
+            <li>Organize Room</li>
+          </ul></td>
+          </tr>
+    </table>
+    <script>
+
+    var myNodelist = document.getElementsByTagName("LI");
+    var i;
+    for (i = 0; i < myNodelist.length; i++) {
+      var span = document.createElement("SPAN");
+      var txt = document.createTextNode("\u00D7");
+      span.className = "close";
+      span.appendChild(txt);
+      myNodelist[i].appendChild(span);
+    }
+    
+    
+    var close = document.getElementsByClassName("close");
+    var i;
+    for (i = 0; i < close.length; i++) {
+      close[i].onclick = function() {
+        var div = this.parentElement;
+        div.style.display = "none";
+      }
+    }
+    
+  
+    var list = document.querySelector('ul');
+    list.addEventListener('click', function(ev) {
+      if (ev.target.tagName === 'LI') {
+        ev.target.classList.toggle('checked');
+      }
+    }, false);
+    
+    
+    function newElement() {
+      var li = document.createElement("li");
+      var inputValue = document.getElementById("myInput").value;
+      var t = document.createTextNode(inputValue);
+      li.appendChild(t);
+      if (inputValue != '') {
+        document.getElementById("list").appendChild(li);
+      } 
+      document.getElementById("myInput").value = "";
+    
+      var span = document.createElement("SPAN");
+      var txt = document.createTextNode("\u00D7");
+      span.className = "close";
+      span.appendChild(txt);
+      li.appendChild(span);
+    
+      for (i = 0; i < close.length; i++) {
+        close[i].onclick = function() {
+          var div = this.parentElement;
+          div.style.display = "none";
+        }
+      }
+    }
+    </script>
+    
+    </body>
+    </html>
